@@ -1,0 +1,3 @@
+mod internal;
+
+fn main() {}
