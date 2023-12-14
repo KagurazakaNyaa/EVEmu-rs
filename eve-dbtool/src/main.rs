@@ -1,3 +1,9 @@
+use clap::Parser;
+
+mod command;
 mod internal;
 
-fn main() {}
+fn main() {
+    let cli = command::index::Cli::parse();
+    cli.run();
+}
