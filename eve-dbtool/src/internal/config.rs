@@ -1,11 +1,7 @@
 use std::env;
 
 pub struct Config {
-    pub db_host: String,
-    pub db_port: u16,
-    pub db_username: String,
-    pub db_password: String,
-    pub db_database: String,
+    pub db_url: String,
     pub seed_market: bool,
     pub seed_regions: Vec<String>,
     pub seed_saturation: u128,
@@ -13,11 +9,7 @@ pub struct Config {
 
 impl Config {
     pub fn build() -> Result<Config, &'static str> {
-        let db_host = env::var("MARIADB_HOST").unwrap();
-        let db_port = env::var("MARIADB_PORT").unwrap().parse::<u16>().unwrap();
-        let db_username = env::var("MARIADB_USER").unwrap();
-        let db_password = env::var("MARIADB_PASSWORD").unwrap();
-        let db_database = env::var("MARIADB_DATABASE").unwrap();
+        let db_url = env::var("DB_URL").unwrap();
         let seed_market = env::var("SEED_MARKET").is_ok();
         let seed_regions = env::var("SEED_REGIONS")
             .unwrap()
@@ -29,11 +21,7 @@ impl Config {
             .parse::<u128>()
             .unwrap();
         Ok(Config {
-            db_host,
-            db_port,
-            db_username,
-            db_password,
-            db_database,
+            db_url,
             seed_market,
             seed_regions,
             seed_saturation,
