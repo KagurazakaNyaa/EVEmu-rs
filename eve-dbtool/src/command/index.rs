@@ -1,5 +1,7 @@
 use clap::{arg, Parser, Subcommand};
 
+use crate::internal::config::Config;
+
 use super::{dungeon, install, seed};
 
 #[derive(Parser)]
@@ -125,11 +127,11 @@ pub enum DungeonSubcommands {
 }
 
 impl Cli {
-    pub fn run(&self) {
+    pub fn run(&self, config: &Config) {
         match &self.command {
-            Commands::Install { limit, dryrun } => install::run(limit, dryrun),
-            Commands::Seed { dryrun } => seed::run(dryrun),
-            Commands::Dungeon { command } => dungeon::run(command),
+            Commands::Install { limit, dryrun } => install::run(limit, dryrun, config),
+            Commands::Seed { dryrun } => seed::run(dryrun, config),
+            Commands::Dungeon { command } => dungeon::run(command, config),
         }
     }
 }

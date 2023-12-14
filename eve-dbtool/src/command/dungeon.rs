@@ -1,3 +1,5 @@
+use crate::internal::config::Config;
+
 use super::index::DungeonSubcommands;
 
 fn list() {
@@ -34,7 +36,7 @@ fn listFactions() {
     todo!()
 }
 
-pub fn run(command: &DungeonSubcommands) {
+pub fn run(command: &DungeonSubcommands, config: &Config) {
     match command {
         DungeonSubcommands::List {} => list(),
         DungeonSubcommands::Apply { overwrite } => apply(overwrite),
